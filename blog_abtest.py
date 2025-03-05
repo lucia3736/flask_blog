@@ -3,13 +3,14 @@ from flask_login import LoginManager, current_user, login_required, login_user, 
 from flask_cors import CORS
 import os
 from blog_view import blog
+from blog_control.user_mgnt import User
 
 # https 만을 지원하는 기능을 http 에서 테스트할 때 필요한 설정
 os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
 app = Flask(__name__, static_url_path='/static')
 CORS(app)
-app.secure_key = 'yunjin_server'
+app.secret_key = 'yunjin_server'
 
 app.register_blueprint(blog.blog_abtest, url_prefix='/blog')
 login_manager = LoginManager()
